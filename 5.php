@@ -8,7 +8,9 @@
 </head>
 <body>
 	<p><a href="5.php">Языки программирования</a> | <a href="5-1.php">Разработчики</a> | <a href="5-2.php">Приложения</a> <br>
+	<hr>
 	Скачать таблицу языков программирования в формате <a href="">xls</a> или <a href="">pdf</a></p>
+	<hr>
 	<h2>Языки программирования:</h2>
 	<table border="1">
 		<tr>
@@ -42,7 +44,7 @@
 		echo "</table>";
 		$num_rows = mysqli_num_rows($result);
 		echo "<P>Всего языков программирования: $num_rows </p>";
-		echo "<p> <a href=''> Добавить язык программирования </a>";
+		echo "<p> <a href='5-new.php'> Добавить язык программирования </a>";
 	?>
 </body>
 </html>
