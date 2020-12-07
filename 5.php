@@ -38,7 +38,7 @@
 			echo "<td>" . $row['yp_type_exec'] . "</td>";
 			echo "<td>" . $row['yp_author'] . "</td>";
 			echo "<td><a href='5-edit.php?ypId=".$row['yp_id']."'>Редактировать</a></td>";
-			echo "<td><a href=''>Удалить</a></td>";
+			echo "<td><a href='5-delete.php?ypId=".$row['yp_id']."'>Удалить</a></td>";
 			echo "</tr>";
 		}
 		echo "</table>";
