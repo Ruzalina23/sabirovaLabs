@@ -11,3 +11,5 @@
 <br>
 <li class="LR"> <a href="4gl.php"><p><big> <b>Лабораторная работа №4</b> </big> </p></a></li>
 <br>
+<li class="LR"> <a href="5.php"><p><big> <b>Лабораторная работа №5</b> </big> </p></a></li>
+<br>
