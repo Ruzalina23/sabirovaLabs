@@ -43,17 +43,17 @@
 			echo "<td>" . $row['app_id'] . "</td>";
 			echo "<td>" . findNameAsYazprogr($link, $row['app_yp_id']) . " (". $row['app_yp_id'] . ")" . "</td>";
 			echo "<td>" . findNameAsDeveloper($link, $row['app_dev_id']) . " (" . $row['app_dev_id'] . ")" . "</td>";
-			echo "<td>" . $row['app_data'] . "</td>";
+			echo "<td>" . date("d.m.Y", strtotime($row['app_data'])) . "</td>";
 			echo "<td>" . $row['app_vers'] . "</td>";
 			echo "<td>" . $row['app_name'] . "</td>";
-			echo "<td><a href=''>Редактировать</a></td>";
-			echo "<td><a href=''>Удалить</a></td>";
+			echo "<td><a href='5-2-edit.php?appId=".$row['app_id']."'>Редактировать</a></td>";
+			echo "<td><a href='5-2-delete.php?appId=".$row['app_id']."'>Удалить</a></td>";
 			echo "</tr>";
 		}
 		echo "</table>";
 		$num_rows = mysqli_num_rows($result);
 		echo "<P>Всего приложений: $num_rows </p>";
-		echo "<p> <a href=''> Добавить приложение </a>";
+		echo "<p> <a href='5-2-new.php'> Добавить приложение </a>";
 	?>
 </body>
 </html>
