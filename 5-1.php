@@ -29,14 +29,14 @@
 			echo "<td>" . $row['dev_id'] . "</td>";
 			echo "<td>" . $row['dev_name'] . "</td>";
 			echo "<td>" . $row['dev_city'] . "</td>";
-			echo "<td><a href=''>Редактировать</a></td>";
-			echo "<td><a href=''>Удалить</a></td>";
+			echo "<td><a href='5-1-edit.php?devId=".$row['dev_id']."'>Редактировать</a></td>";
+			echo "<td><a href='5-1-delete.php?devId=".$row['dev_id']."'>Удалить</a></td>";
 			echo "</tr>";
 		}
 		echo "</table>";
 		$num_rows = mysqli_num_rows($result);
 		echo "<P>Всего разработчиков: $num_rows </p>";
-		echo "<p> <a href=''> Добавить разработчика</a>";
+		echo "<p> <a href='5-1-new.php'> Добавить разработчика</a>";
 	?>
 </body>
 </html>
