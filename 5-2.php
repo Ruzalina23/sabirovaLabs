@@ -9,6 +9,8 @@
 <body>
 	<p><a href="5.php">Языки программирования</a> | <a href="5-1.php">Разработчики</a> | <a href="5-2.php">Приложения</a> <br>
 	<hr>
+	Скачать таблицу языков программирования в формате <a href="gen_xls.php">xls</a> или <a href="gen_pdf.php">pdf</a></p>
+	<hr>
 	<h2>Приложения:</h2>
 	<table border="1">
 		<tr>
