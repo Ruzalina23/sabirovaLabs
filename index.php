@@ -13,3 +13,7 @@
 <br>
 <li class="LR"> <a href="5.php"><p><big> <b>Лабораторная работа №5</b> </big> </p></a></li>
 <br>
+<li class="LR"> <a href="6.html"><p><big> <b>Лабораторная работа №6</b> </big> </p></a></li>
+<br>
+<li class="LR"> <a href="7.html"><p><big> <b>Лабораторная работа №7</b> </big> </p></a></li>
+<br>
