@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+		7-6
+	</title>
+	<script type="text/javascript" language="javascript" charset="utf-8">
+		function send() {
+			if (userName() && userPassword() && userEmail() && userMessage() && userConfPassword()) {
+                alert("Введенные данные верны");
+			}
+		} 
+
+		function userName () {
+			var userName = document.getElementById('user_name');
+			if (userName.value.length == 0) {
+				userName.classList.remove('borderGreen');
+				userName.classList.add('borderRed');
+				alert('Надо ввести имя');
+				return false;
+			} else {
+				userName.classList.add('borderGreen');
+				userName.classList.remove('borderRed');
+				return true;
+			}	
+		}
+
+		function userPassword () {
+			var userPassword = document.getElementById('user_password');
+			if (userPassword.value.length == 0) {
+				userPassword.classList.remove('borderGreen');
+				userPassword.classList.add('borderRed');
+				alert('Надо ввести пароль');
+				return false;
+			} else {
+				userPassword.classList.add('borderGreen');
+				userPassword.classList.remove('borderRed');
+				return true;
+			}
+		}
+
+		function userConfPassword () {
+			var userPassword = document.getElementById('user_password');
+			var userConfirmPassword = document.getElementById('user_confirm_password');
+			if (userConfirmPassword.value !== userPassword.value) {
+				userConfirmPassword.classList.remove('borderGreen');
+				userConfirmPassword.classList.add('borderRed');
+				alert('Пароли должны совпадать');
+				return false;
+			} else {
+				userConfirmPassword.classList.add('borderGreen');
+				userConfirmPassword.classList.remove('borderRed');
+				return true;
+			}
+		}
+
+		function userEmail () {
+			var userEmail = document.getElementById('user_email');
+			if (userEmail.value.length == 0) {
+				alert('Надо ввести почту');
+				return false;
+			} else {
+				if (userEmail.value.indexOf("@",5) == -1) {
+					userEmail.classList.remove('borderGreen');
+					userEmail.classList.add('borderRed');
+					alert('Почта должна содержать \'@\'');
+					return false;
+				} else {
+					userEmail.classList.add('borderGreen');
+					userEmail.classList.remove('borderRed');
+					return true;
+				}
+			}
+		}
+
+		function userMessage () {
+			var userMessage = document.getElementById('user_message');
+			if (userMessage.value.length <= 10) {
+				userMessage.classList.remove('borderGreen');
+				userMessage.classList.add('borderRed');
+				alert('Длинна сообщенияминимум 10 символов');
+				return false;
+			} else {
+				userMessage.classList.add('borderGreen');
+				userMessage.classList.remove('borderRed');
+				return true;
+			}
+		}
+	</script>
+	<style>
+		.borderGreen {
+			border-color: lightgreen;
+		}
+
+		.borderRed {
+			border-color: red;
+		}
+	</style>
+</head>
+<body>
+	<form id="userMessage">
+		<b>Ваши данные:</b>
+		<br> *Ваше имя <input type="text" id="user_name" size="50" onchange="userName();"> 
+		<br> *Пароль <input type="password" id="user_password" size="20" onchange="userPassword();"> 
+		<br> *Подтверждение пароля	<input type="password" id="user_confirm_password" size="20" onchange="userConfPassword();">
+		<br> *Email <input type="text" id="user_email" size="30" onchange="userEmail();">
+		<br> Тема сообщения <input type="text" id="user_message_title" size="20">
+		<br> Сообщение <textarea id="user_message" row="4" cols="40" onchange="userMessage();"></textarea>
+		<br><input type="button" id="subButton" value="Отправить" onClick="send();">
+		<input type="reset" value="Отменить">
+	</form>
+</body>
+</html>

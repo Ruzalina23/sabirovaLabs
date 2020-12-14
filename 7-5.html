@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+		7-5
+	</title>
+	<style>
+		#imgDiv {
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+			height: 200px;
+			width: 200px;
+  			background-image: url("image.jpg");
+	 	}
+	</style>
+</head>
+<body>
+	<script type="text/javascript" language="javascript" charset="utf-8">
+		function upImg() {
+			var imgDiv = document.getElementById('imgDiv');
+			imgDiv.style.height = "400px";
+			imgDiv.style.width = "400px";
+		}
+
+		function downImg() {
+			var imgDiv = document.getElementById('imgDiv');
+			imgDiv.style.height = "200px";
+			imgDiv.style.width = "200px";
+		}
+	</script>
+
+	<div id="imgDiv" onMouseOver="upImg()" onMouseOut="downImg()">
+	</div>
+</body>
+</html>
