@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-2</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <style>
+        .borderGreen {
+            border-color: lightgreen;
+        }
+        .borderRed {
+            border-color: red;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+
+            $('#userMessage').submit(function(e) {
+                e.preventDefault();
+                var name = $('#user_name').val();
+                var email = $('#user_email').val();
+                var password = $('#user_password').val();
+                var passwordConfirm = $('#user_confirm_password').val();
+                var message = $('#user_message').val();
+                var msg_title = $('#user_message_title').val();
+
+                var auth = true;
+                if (name.length < 1) {
+                    $('#user_name').addClass("borderRed");
+                    auth = false;
+                } else {
+                    $('#user_name').removeClass("borderRed");
+                    $('#user_name').addClass("borderGreen");
+                }
+                if (!email.includes('@')) {
+                    $('#user_email').addClass("borderRed");
+                    auth = false;
+                } else {
+                    $('#user_email').removeClass("borderRed");
+                    $('#user_email').addClass("borderGreen");
+                }
+                if (password.length < 5) {
+                    $('#user_password').addClass("borderRed");
+                    auth = false;
+                } else {
+                    $('#user_password').removeClass("borderRed");
+                    $('#user_password').addClass("borderGreen");
+                }
+                if(passwordConfirm !== password || passwordConfirm == '') {
+                    $('#user_confirm_password').addClass("borderRed");
+                    auth = false;
+                } else {
+                    $('#user_confirm_password').removeClass("borderRed");
+                    $('#user_confirm_password').addClass("borderGreen");
+                }
+                if (message.length < 10) {
+                    $('#user_message').addClass("borderRed");
+                    auth = false;
+                } else {
+                    $('#user_message').removeClass("borderRed");
+                    $('#user_message').addClass("borderGreen");
+                }
+
+                if (auth) {
+                    alert("Вы авторизовались");
+                }
+
+            });
+
+        });
+
+    </script>
+
+    <form id="userMessage">
+        <b>Ваши данные:</b>
+        <br> *Ваше имя <input type="text" id="user_name" size="50"> 
+        <br> *Пароль <input type="password" id="user_password" size="20"> 
+        <br> *Подтверждение пароля	<input type="password" id="user_confirm_password" size="20">
+        <br> *Email <input type="text" id="user_email" size="30">
+        <br> Тема сообщения <input type="text" id="user_message_title" size="20">
+        <br> Сообщение <textarea id="user_message" row="4" cols="40"></textarea>
+        <br><input type="submit" id="subButton" value="Отправить">
+        <input type="reset" value="Отменить">
+    </form>
+
+</body>
+</html>
+
+
+

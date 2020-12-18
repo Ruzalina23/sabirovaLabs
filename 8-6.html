@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-6</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <script>
+        $(document).ready(function(){
+            var answers = Math.floor(5 + Math.random() * (46) + 1);
+            var val1 = Math.floor(Math.random() * (answers + 1));;
+            var val2 = Math.floor(Math.random() * (answers - val1 + 1));
+            var val3 = answers - val2 - val1;
+            var clicked = false;
+            $('input').click(function(){
+                if (!clicked) {
+                    $('#q1').after("<span> <" + Math.floor(val1 / answers * 100) + "%></span>");
+                    $('#q2').after("<span> <" + Math.floor(val2 / answers * 100) + "%></span>");
+                    $('#q3').after("<span> <" + Math.floor(val3 / answers * 100) + "%></span>");
+                    clicked = true;
+                }
+            });
+
+        });
+    </script>
+
+    <h3>Ответьте на вопрос</h3>
+    <h4>Кто виноват в ДТП?</h4>
+    <img src="dtp.png" alt="нет">
+    <p><input type="radio"><span id="q1">Красный автомобиль</span></p>
+    <p><input type="radio"><span id="q2">Желтый автомобиль</span></p>
+    <p><input type="radio"><span id="q3">Обоюдная вина</span></p>
+
+</body>
+</html>

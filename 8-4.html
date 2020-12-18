@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-4</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <script>
+        $(document).ready(function(){
+        $(document).mousemove(function(event) {
+            $("#x").text("Позиция по горизонтали: " + event.pageX);
+            $("#y").text("Позиция по вертикали: " + event.pageY);
+        });
+        });
+    </script>
+    <p>
+        <h4 id="x">Позиция по горизонтали:</h4>
+        <h4 id="y">Позиция по вертикали:</h4>    
+    </p>
+</body>
+</html>

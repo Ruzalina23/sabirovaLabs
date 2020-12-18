@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-3</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <style>
+        .div {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 700px;
+            height: 700px;
+            background-color: lightblue;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+        $("#up").click(function(){
+            if($("img").offset().top > 100) {
+                $("img").animate({'marginTop': "-=100px"}, 5);
+            }
+        });
+        $("#left").click(function(){
+            if($("img").offset().left > 100)
+            $("img").animate({'marginLeft': "-=100px"}, 5);
+        });
+        $("#right").click(function(){
+            if($("img").offset().left < 700)
+            $("img").animate({'marginLeft': "+=100px"}, 5);
+        });
+        $("#down").click(function(){
+            if($("img").offset().top < 700)
+            $("img").animate({'marginTop': "+=100px"}, 5);
+        });
+        });
+    </script>
+    <div class="div">
+        <img src="pic.jpg" alt="Картинки нет">
+    </div>
+    
+    <p>
+    <button id="up">Вверх</button>
+    <button id="down">Вниз</button>
+    </p>
+    <p>
+    <button id="left">Влево</button>
+    <button id="right">Вправо</button>
+    </p>
+
+</body>
+
+    
+
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-5</title>
+    <script src="jquery.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/jquery-ui.min.js"></script>
+</head>
+<body>
+
+<p>Подними и бросай</p>
+<h4 id="meters">На сколько метров перетащили: 0</h4>
+
+    <script>
+        $(document).ready(function(){
+            var meters = 0;
+            var isDown = false;
+
+            $("img").draggable();
+            $("img").on('mouseup', function(){
+                $("img").animate({height: '150'}, "fast");
+                isDown = false;
+            });
+            $("img").on('mousedown', function(){
+                $("img").animate({height: '100'}, "fast");
+                isDown = true;
+            });
+            $("img").on('mousemove', function(){
+                if (isDown) {
+                    meters += 1;
+                    $('#meters').text("На сколько метров перетащили: " + meters);
+                }
+            });
+        });
+    </script>
+
+    <div>
+        <img src="pic.jpg" alt="Нет">
+    </div>
+
+</body>
+</html>

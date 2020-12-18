@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-7</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <p>
+        <input id="input" type="text">
+        <button id="delete">D</button>
+        <button id="clear">C</button>
+    </p>
+    <p>
+        <button id="num1">1</button>
+        <button id="num2">2</button>
+        <button id="num3">3</button>
+        <button id="plus">+</button>
+    </p>
+    <p>
+        <button id="num4">4</button>
+        <button id="num5">5</button>
+        <button id="num6">6</button>
+        <button id="minus">-</button>
+    </p>
+    <p>
+        <button id="num7">7</button>
+        <button id="num8">8</button>
+        <button id="num9">9</button>
+        <button id="mult">*</button>
+    </p>
+    <p>
+        <button id="num0">0</button>
+        <button id="dot">.</button>
+        <button id="divide">/</button>
+        <button id="equals">=</button>
+    </p>
+    <script>
+        $(document).ready(function(){
+            
+            var input = $('#input');
+            
+            $('#num1,#num2,#num3,#num4,#num5,#num6,#num7,#num8,#num9,#num0').click(function(){
+                input.val(input.val() + this.id.split("m")[1]);
+            });
+
+            $('#divide').click(function(){
+                input.val(input.val() + "/");
+            });
+            $('#plus').click(function(){
+                input.val(input.val() + "+");
+            });
+            $('#minus').click(function(){
+                input.val(input.val() + "-");
+            });
+            $('#mult').click(function(){
+                input.val(input.val() + "*");
+            });
+            $('#clear').click(function(){
+                input.val('');
+            });
+
+            $('#delete').click(function(){
+                input.val(input.val().substring(0, input.val().length-1));
+            });
+
+            $('#dot').click(function(){
+                input.val(input.val() + ".");
+            });
+
+            $('#equals').click(function(){
+            if (!proverka(input.val())) {
+                alert("Нельзя посчитать");
+            } else {
+                input.val(eval(input.val()));
+            }
+            });
+
+            function proverka(string) {
+                var slices = string.split(/\+|\-|\/|\*/);
+                var ok = true;
+                if (string.substring(0, 1) === '-' && string.substring(1, 2) === '-') {
+                    ok = false;
+                }
+                slices.forEach(function(element) {
+                    if (element === '' && string.substring(0, 1) !== '-') {
+                        ok = false;
+                    }
+                    if (element.slice(-1) === '.' || element.substring(0, 1) === '.') {
+                        ok = false;
+                    }
+                });
+                return ok;
+            }
+        });
+    </script>
+
+</body>
+</html>

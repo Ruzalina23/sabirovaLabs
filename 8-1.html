@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>8-1</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <script>
+        $(document).ready(function(){
+
+            var color = "white";
+
+            function setColor() {
+                if (color === "red") {
+                    color = "white";
+                } else {
+                    color = "red";
+                }
+                return color;
+            }
+
+            $('#button').click(function(){
+                $('body').css('background', setColor());
+            });
+        });
+    </script>
+    <button id="button">Поменять цвет</button>
+</body>
+</html>
