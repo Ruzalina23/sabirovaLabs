@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9-1</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+    <style>
+        .content {
+            align-content: center;
+            /* display: flex; */
+            padding-bottom: 20px;
+        }   
+
+        .newsf {
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 20px;
+            align-content: center;
+            padding-left: 50px;
+            width: 50%;
+            border: 2px solid black;
+        }
+
+        p {
+            padding-left: 20px;
+        }
+
+        .btn {
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 10px;
+            width: 500px;
+            align-content: center;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function(){
+            var current = 2;
+            $('input').click(function(){
+                $.ajax({
+                    method: "POST",
+                    url: "9-1.php",
+                    data: { 
+                        current: current,
+                        load: 5 
+                    },
+                    success: function(response) {
+                        var news = JSON.parse(response);
+                        for (var i in news) {
+                            var zapis = JSON.parse(news[i]);
+                            addZapis(zapis.title, zapis.text, zapis.img);
+                        }
+                        
+                    }
+                });
+            });
+
+            function addZapis(title, text, img) {
+                var lastDiv = $('#zapis' + current);
+                current += 1;
+                lastDiv.after(
+                    "<div id='zapis" + current + "'  class='newsf'>" + 
+                        "<h2>" + title + "</h2>" + 
+                        "<div class='content'>" +
+                            "<img src='" + img + "' alt='Нет'>" + 
+                            "<p>" + text + "</p>" +
+                        "</div>" +
+                    "</div>"
+                );
+            }
+
+        });
+    </script>
+
+    <div>
+        <div id="zapis1" class="newsf">
+            <h2>в особенности же консультация</h2>
+            <div class="content">
+                <img src="1.jpg" alt="Нет">
+                <p>Задача организации, в особенности же консультация с профессионалами из IT влечет за собой процесс внедрения и модернизации позиций, занимаемых участниками в отношении поставленных задач? Равным образом консультация с профессионалами из IT способствует подготовке и реализации новых предложений.
+                </p>
+            </div>
+        </div>
+        <div id="zapis2" class="newsf">
+            <h2>постоянный количественный рост</h2>
+            <div class="content">
+                <img src="2.jpg" alt="Нет">
+                <p>С другой стороны постоянный количественный рост и сфера нашей активности обеспечивает актуальность новых предложений! Разнообразный и богатый опыт рамки и место обучения кадров позволяет выполнить важнейшие задания по разработке направлений прогрессивного развития. Задача организации, в особенности же сложившаяся с
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="btn">
+        <input type="button" value="Еще" />
+    </div>
+    
+
+</body>
+</html>

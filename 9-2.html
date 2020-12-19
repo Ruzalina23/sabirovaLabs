@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>9-2</title>
+    <script src="jquery.js"></script>
+</head>
+<body>
+
+    <style>
+        .content {
+            padding-bottom: 10px;
+        }
+
+        .pismof {
+            padding-left: 50px;
+            width: 50%;
+            border: 2px solid black;
+        }
+
+        p {
+            word-wrap : break-word;
+        }
+
+        .borderGreen {
+            border-color: lightgreen;
+        }
+        .borderRed {
+            border-color: red;
+        }
+    </style>
+
+    <script>
+        var current = 0;
+
+        $(document).ready(function(){
+            
+            $('#user_message').val("");
+            loadPisma();
+
+            $('#userMessage').submit(function(e) {
+                e.preventDefault();
+                var name = $('#user_name').val();
+                var email = $('#user_email').val();
+                var message = $('#user_message').val();
+                var msg_title = $('#user_message_title').val();
+
+                var auth = true;
+                if (name.length < 1) {
+                    $('#user_name').addClass("borderRed");
+                    auth = false;
+                } else {
+                    $('#user_name').removeClass("borderRed");
+                    $('#user_name').addClass("borderGreen");
+                }
+                if (!email.includes('@')) {
+                    $('#user_email').addClass("borderRed");
+                    auth = false;
+                } else {
+                    $('#user_email').removeClass("borderRed");
+                    $('#user_email').addClass("borderGreen");
+                }
+                if (message.length < 10) {
+                    $('#user_message').addClass("borderRed");
+                    auth = false;
+                } else {
+                    $('#user_message').removeClass("borderRed");
+                    $('#user_message').addClass("borderGreen");
+                }
+
+                if (auth) {
+                    sendPismo(name, email, msg_title, message);
+                }
+
+            });
+
+            function sendPismo(name, email, title, message) {
+                $.ajax({
+                    method: "POST",
+                    url: "9-2.php",
+                    data: { 
+                        name: name,
+                        email: email,
+                        title: title,
+                        message: message,
+                    },
+                    success: function(response) {
+                        alert(response);
+                    }
+                });
+            }
+
+            function loadPisma() {
+                $.ajax({
+                    method: "POST",
+                    url: "9-22.php",
+                    success: function(response) {
+                        news = JSON.parse(response);
+                        news.forEach(element => {
+                            element = JSON.parse(element);
+                            insertDiv(element.name, element.title, element.message, element.email);
+                        });
+                    }
+                });
+            }
+
+            function insertDiv(name, title, message, email) {
+                var lastDiv;
+                if (current !== 0) {
+                    lastDiv = $('#email' + current);
+                } else {
+                    lastDiv =  $("#nadpis");
+                }
+                current += 1;
+                lastDiv.after(
+                    "<div id='email" + current +"' class='pismof'>" + 
+                        "<h3>Пользователь - " + name + " с почтой - " + email +"</h3>" +"<span> написал сообщение:</span>" + 
+                        "<div class='content'>" +
+                            "<h4>" + title + "</h4>" +
+                            "<p>" + message + "</p>" +
+                        "</div>"+
+                    "</div>"
+                );
+            }
+
+        });
+
+    </script>
+
+    <div id="form">
+        <form id="userMessage">
+            <b>Ваши данные:</b>
+            <br> *Ваше имя <input type="text" id="user_name" size="50"> 
+            <br> *Email <input type="text" id="user_email" size="30">
+            <br> Тема сообщения <input type="text" id="user_message_title" size="20">
+            <br> Сообщение <textarea id="user_message" row="4" cols="40"></textarea>
+            <p><br><input type="submit" value="Отправить" />
+            <p><br><input id="id" type="reset" value="Очистить"></p>
+        </form>
+    </div>
+
+
+    <div id="pisma">
+        <h2 id="nadpis">Все сообщения:</h2>
+    </div>
+
+</body>
+</html>
