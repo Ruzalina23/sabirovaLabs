@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        лр10
+    </title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="datepicker-ru.js"></script>
+</head>
+<body>
+
+    <style>
+        div#tours-div { width: 700px; margin: 20px 0; }
+        div#tours-div table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+        div#tours-div table td, div#tours-div table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+        #custom-handle {
+            width: 3em;
+            height: 1.6em;
+            top: 50%;
+            margin-top: -.8em;
+            text-align: center;
+            line-height: 1.6em;
+        }
+        #slider {
+            width: 80%;
+        }
+    </style>
+
+    <script>
+        $(document).on('ready', function(){
+            var vars = ["Россия", "ОАЭ", "Франция", "Испания", "Гоа", "Македония", "Турция", "Египет", "Англия", "Мальдивы"];
+            $("#menus").tabs();
+            $( document ).tooltip();
+            $( "#datepicker" ).datepicker();
+            $("#accordion").accordion({
+                collapsible: true,
+                active: false,
+                autoHeight: false,
+                heightStyle: "content"
+            });
+            $("#accordion2").accordion({
+                collapsible: true,
+                active: false,
+                autoHeight: false,
+                heightStyle: "content"
+            });
+            $("#accordion3").accordion({
+                collapsible: true,
+                active: false,
+                autoHeight: false,
+                heightStyle: "content"
+            });
+            $("#price").text("Стоимость: 50000 руб");
+            var handle = $( "#custom-handle" );
+            $( "#slider" ).slider({
+                range: "min",
+                value: 7,
+                min: 7,
+                max: 60,
+                width: '100px',
+                create: function() {
+                    handle.text( $( this ).slider( "value" ) );
+                },
+                slide: function( event, ui ) {
+                    handle.text( ui.value );
+                    tour["days"] = ui.value;
+                }
+            });
+
+            $( "#regTip" ).dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+
+            $( "#f" ).dialog({
+                autoOpen: false,
+                show: {
+                    effect: "blind",
+                    duration: 1000
+                },
+                hide: {
+                    effect: "explode",
+                    duration: 1000
+                }
+            });
+
+            $("#reg-form").dialog({
+                autoOpen: false,
+                height: 'auto',
+                width:'700px',
+                modal: true,
+                buttons: {
+                    "Готово": registerTour,
+                }
+            });
+
+            $( "#regTipOpen" ).button().on( "click", function() {
+                $("#regTip").dialog("open");
+            });
+
+            $( "#regBtn" ).button().on( "click", function() {
+                $("#reg-form").dialog("open");
+                $( "#tourType" ).selectmenu();
+                $( "#countries" ).autocomplete({
+                    source: vars
+                });
+            });
+
+        });
+        
+        function priceCount() {
+            var country = $("#countries").val();
+            var price = tour["price"];
+            if (tour["days"] === 7) {
+                price = tour["price"];
+            } else {
+                price = price + 10000 * tour["days"];
+            }
+            if (country === "ОАЭ" || country === "Мальдивы" || country === "Македония") {
+                price = price * 1.5;
+            }
+        
+            $("#price").text("Стоимость: " + price + " руб");
+            return price;
+        }
+
+        function registerTour() {
+            var name = $("#name").val();
+            var date = $("#datepicker").val();
+            var days = tour.days;
+            var country = $("#countries").val();
+            var type = $("#tourType").val();
+            var price = priceCount();
+            if (name === '' || date === '' || country === '' || type === '') {
+                $("#f").dialog("open");
+                return;
+            }
+
+            $( "#tours tbody" ).append( "<tr>" +
+                "<td>" + country + "</td>" +
+                "<td>" + type + "</td>" +
+                "<td>" + date + "</td>" +
+                "<td>" + days + "</td>" +
+                "<td>" + price + "</td>" +
+                "<td>" + name + "</td>" +
+            "</tr>" );
+
+            $("#reg-form").dialog("close");
+        }
+
+        var tour = {
+            price: 50000,
+            days: 7
+        };
+
+    </script>
+
+    <div id="main">
+        <h1>Зарегистрируйтесь на туры!</h1>
+        <div id="menus">
+            <ul>
+              <li><a href="#obzor">Обзор туров</a></li>
+              <li><a href="#reg">Регистрация на тур</a></li>
+            </ul>
+            <div id="obzor">
+                <h1>Обзор туров</h1>
+                <div>
+                    <hr />
+                    <h2>Тур на Мальдивы</h2>
+                    <img src="tour1.jpg" title="Пляж Мале" alt="ytn">
+                    <h4>Это будет лучший отдых в вашей жизни</h4>
+                    <div id="accordion">
+                        <h3>Описание</h3>
+                        <div>
+                            <p>
+                            Дело в том, что прочитав этот список лучших пляжей мира, я практически со всем согласилась, так как бывала на них лично и знаю, где они находятся и что собой представляют. Но, конечно, я и от себя добавлю немного про хорошие отели на лучших пляжах мира и уточню, действительно ли отдых на этих пляжах так хорош, как пишут в отзывах.
+                            Все, собираем вещи, выбираем лучший пляж и едем отдыхать на море!
+                            Лучшие пляжи мира почти всегда находятся ближе к экватору и в тропиках, то есть далеко. И лететь туда на самолете довольно долго. Но однозначно стоит потратить и деньги, и время, ведь поездка на море всегда обновляет человека. Побывав во многих уголках нашей планеты и поездив по самым разным странам, я поняла, что любое путешествие стоит завершать хорошим пляжным отдыхом.
+                            Если вы недавно поженились и ищите отличное место для медового месяца, или хотите отправиться на годовщину свадьбы, или вы семейная пара с детишками, а может просто хотите порелаксировать на лучших пляжах мира, то эта статья для вас.
+                            </p>
+                        </div>
+                    </div>
+                    <h4>Тур на 21 ночь</h4>
+                    <p><b>Успейте по горячей цене! 1 500 000 руб</b></p>
+                </div>
+                <div>
+                    <hr />
+                    <h2>Тур в Горы</h2>
+                    <img src="tour2.jpg" title="Красивые горы" alt="ytn">
+                    <h4>Активный отдых. Экстремальное путешествие!</h4>
+                    <div id="accordion2">
+                        <h3>Описание</h3>
+                        <div>
+                            <p>
+                                Комплексный недельный экскурсионный тур с проживанием в комфортабельных условиях. Тематические экскурсии и маршруты проходят по историческим и живописным местам Большого Сочи. В ходе программы Вы побываете в историческом центре города, поднимитесь на вершину горы Ахун и обозреете окрестности с высотв птичьего полета, продегустируете нарзан, прекрасно проведете время на пикнике и познакомитесь с древними памятниками архитектуры Российского Причерноморья. Всю программу Вас будет сопровождать зеленая природа субтропического Сочи и яркое южное солнце. Программа тура рассчитана на туристов от 6 лет.
+                            </p>
+                        </div>
+                    </div>
+                    <h4>Тур на 7 ночей</h4>
+                    <p><b>Цена: 100 000 руб</b></p>
+                    <hr />
+                </div>
+                <div>
+                    <h2>Кругосветное путешествие</h2>
+                    <img src="tour3.jpg" title="Пляж Мале" alt="ytn">
+                    <h4>Морской круиз на лайнере!</h4>
+                    <div id="accordion3">
+                        <h3>Описание</h3>
+                        <div>
+                            <p>
+                                Морские круизы от компании «Инфофлот» стали для клиентов совершенной гармонией комфортного отдыха на борту и интересного - в городах-стоянках, многогранности направлений путешествий и развлечений. Совершить путешествие вы можете в любое время круизного сезона, когда захотите настоящего отдыха, ведь во многие круизы можно отправиться даже без визы. Уже сегодня вам доступна возможность выбрать лайнер для великолепного путешествия!
+                                Комфортный отдых! Порадуют не только цены на морские круизы от туроператора «Инфофлот», но и множество возможностей для отдыха и развлечений. Морские круизы - это уютность кают, многие из которых имеют балкон, возможность не отказывать себе в посещении SPA, бассейна, спортивного зала, ресторана. На некоторых лайнерах предусмотрены стены для скалолазания, гольф. Любой вечер круиза богат на зрелищность – от ярких представлений в духе Лас-Вегаса до музыкальных салонов.
+                                В круиз с дорогими людьми! На лайнерах могут быть предусмотрены безопасные и увлекательные развлечения для детей. Возможность купить морской круиз также заинтересует компанию друзей.
+                            </p>
+                        </div>
+                    </div>
+                    <h4>Эксклюзив! Тур на 120 ночей</h4>
+                    <p><b>Цена: от 1 000 000 руб</b></p>
+                    <hr />
+                </div>
+            </div>
+            <div id="reg">
+                <div id="tours-div" class="ui-widget">
+                    <h1>Список туров:</h1>
+                    <table id="tours" class="ui-widget ui-widget-content">
+                      <thead>
+                        <tr class="ui-widget-header ">
+                          <th>Страна</th>
+                          <th>Тип тура</th>
+                          <th>Дата начала</th>
+                          <th>Срок (дней)</th>
+                          <th>Стоимость (руб)</th>
+                          <th>ФИО участника</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Испания</td>
+                          <td>Отдых на пляже</td>
+                          <th>09.10.2020</th>
+                          <th>20</th>
+                          <th>200000</th>
+                          <th>Васильков Василий Васильевич</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <button id='regBtn' class='ui-button ui-widget ui-corner-all'>Зарегистрировать свой тур</button>
+            </div>
+          </div>
+    </div>
+
+    <div id="reg-form" title="Регистрация">
+        <h3>Заполните форму</h3>
+        <button id='regTipOpen' class='ui-button ui-widget ui-corner-all'>Подсказка</button>
+        <form>
+            <p>Фио ответственного участника: <input type="text" id="name"></p>
+            <p>Назначьте дату начала: <input type="text" id="datepicker"></p>
+            <p>Продолжительность в днях: 
+                <div id="slider">
+                    <div id="custom-handle" class="ui-slider-handle"></div>
+                </div>
+            </p>
+            <p>Страна: <input id="countries"></p>
+            <p>Тип тура: 
+                <select id="tourType">
+                    <option>Отдых на пляже</option>
+                    <option>Достопримечательности</option>
+                    <option>Экстремальный отдых</option>
+                    <option>Романтическое приключение</option>
+                    <option>Экскурсия</option>
+                    <option>Прогулка</option>
+                </select>
+            </p>
+            <p id="price"><b>Стоимость: </b></p>
+        </form>
+        <button class='ui-button ui-widget ui-corner-all' onclick="priceCount();">Рассчитать стоимость</button>
+    </div>
+
+    <div id="regTip" title="Подсказка">
+        <p>Все данные будут проверять после отправки!</p>
+    </div>
+
+    <div id="f" title="Предупреждение">
+        <p>Вы заполнили не все поля</p>
+    </div>
+
+</body>
+</html>
