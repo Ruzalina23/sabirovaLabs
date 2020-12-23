@@ -23,3 +23,5 @@
 <br>
 <li class="LR"> <a href="10.html"><p><big> <b>Лабораторная работа №10</b> </big> </p></a></li>
 <br>
+<li class="LR"> <a href="11.html"><p><big> <b>Лабораторная работа №11</b> </big> </p></a></li>
+<br>
